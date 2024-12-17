@@ -24,21 +24,21 @@ const HomeScreen = ({ navigation }) => (
         {
           id: 1,
           title: "Street Art",
-          screen:"Street",
+          screen: "Street",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn79BD8L2vTvAFU6QHqUAHWHcbr-U1zmkEKA&s",
         },
         {
-          id:2,
+          id: 2,
           title: "Galleries",
-          screen:"Gallery",
+          screen: "Gallery",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBveYyD_BZwjnKqU2eYdSkFkbfEIqToFRHJA&s",
         },
         {
-          id:3,
+          id: 3,
           title: "Studios",
-          screen:"Studio",
+          screen: "Studio",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR1kyUSYW15G33tt25YO5lthO0g8iSqgmAwg&s",
         },
@@ -58,15 +58,15 @@ const HomeScreen = ({ navigation }) => (
 );
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 20, 
-    backgroundColor: "#fff" 
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#fff",
   },
-  header: { 
-    fontSize: 29, 
-    fontWeight: "bold", 
-    paddingBottom: 40 
+  header: {
+    fontSize: 29,
+    fontWeight: "bold",
+    paddingBottom: 40,
   },
   touchableButton: {
     backgroundColor: "pink",
@@ -74,17 +74,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
   },
-  buttonText: { 
-    color: "black", 
-    fontSize: 16, 
-    textAlign: "center" 
+  buttonText: {
+    color: "black",
+    fontSize: 16,
+    textAlign: "center",
   },
   categoryButton: {
     padding: 10,
-    backgroundColor: '#ddd',
+    backgroundColor: "#ddd",
     borderRadius: 5,
     marginRight: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   categoryText: {
     fontSize: 16,
@@ -95,12 +95,11 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 5,
     marginBottom: 10,
-
   },
   categoryImage: {
     width: 200,
     height: 200,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 });
 

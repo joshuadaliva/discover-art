@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { TextInput } from "react-native-gesture-handler";
-import saveArt from '../db/saveArt'
+import saveArt from "../db/saveArt";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ArtSpotDetailsScreen = ({ navigation, route }) => {
@@ -76,15 +76,29 @@ const ArtSpotDetailsScreen = ({ navigation, route }) => {
     }
   };
 
-
-  const saveFromArt = async (image,title,category,fullname,location,rating,description) => {
-    try{
-      const result = await saveArt(image,title,category,fullname,location,rating,description)
-      
-    }catch(error){
-      console.log(error)
+  const saveFromArt = async (
+    image,
+    title,
+    category,
+    fullname,
+    location,
+    rating,
+    description
+  ) => {
+    try {
+      const result = await saveArt(
+        image,
+        title,
+        category,
+        fullname,
+        location,
+        rating,
+        description
+      );
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -100,7 +114,20 @@ const ArtSpotDetailsScreen = ({ navigation, route }) => {
       <Text>Location: {data.location}</Text>
       <Text>Rating: {data.rating ? data.rating : 0}</Text>
       <Text>Description: {data.description}</Text>
-      <TouchableOpacity style={styles.button} onPress={() => saveFromArt(data.image,data.title,data.category,fullname.fullname,data.location,data.rating,data.description)}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          saveFromArt(
+            data.image,
+            data.title,
+            data.category,
+            fullname.fullname,
+            data.location,
+            data.rating,
+            data.description
+          )
+        }
+      >
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
       {!isSameUser && (

@@ -19,8 +19,8 @@ const AddPost = () => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
-  const [filename, setFilename] = useState('')
-  const [activeBtn, setActiveBtn] = useState(null)
+  const [filename, setFilename] = useState("");
+  const [activeBtn, setActiveBtn] = useState(null);
 
   const pickImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -36,11 +36,9 @@ const AddPost = () => {
     });
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      setFilename(result.assets[0].fileName)
+      setFilename(result.assets[0].fileName);
     }
   };
-
-
 
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container1}>
@@ -49,7 +47,7 @@ const AddPost = () => {
           <Text style={styles.buttonText}>Add Image</Text>
         </TouchableOpacity>
         <View style={{ alignItems: "center" }}>
-          {filename && <Text style={{marginBottom:10}}>{filename}</Text>}
+          {filename && <Text style={{ marginBottom: 10 }}>{filename}</Text>}
         </View>
         <TextInput
           style={styles.input}
@@ -63,23 +61,35 @@ const AddPost = () => {
           value={description}
           onChangeText={setDescription}
         />
-        <View style={{flexDirection:"row", gap:5}}>
-          <TouchableOpacity activeOpacity={2}  style={[styles.uploadButton, activeBtn === 1 && styles.activeBtn]} onPress={() => {
-             setActiveBtn(1)
-             setCategory("street arts")
-          }}>
+        <View style={{ flexDirection: "row", gap: 5 }}>
+          <TouchableOpacity
+            activeOpacity={2}
+            style={[styles.uploadButton, activeBtn === 1 && styles.activeBtn]}
+            onPress={() => {
+              setActiveBtn(1);
+              setCategory("street arts");
+            }}
+          >
             <Text style={styles.buttonText}>Street Arts</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={2}  style={[styles.uploadButton, activeBtn === 2 && styles.activeBtn]} onPress={() => {
-             setActiveBtn(2)
-             setCategory("gallery arts")
-          }}>
+          <TouchableOpacity
+            activeOpacity={2}
+            style={[styles.uploadButton, activeBtn === 2 && styles.activeBtn]}
+            onPress={() => {
+              setActiveBtn(2);
+              setCategory("gallery arts");
+            }}
+          >
             <Text style={styles.buttonText}>Gallery Arts</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={2}  style={[styles.uploadButton, activeBtn === 3 && styles.activeBtn]} onPress={() => {
-             setActiveBtn(3)
-             setCategory("studio arts")
-          }}>
+          <TouchableOpacity
+            activeOpacity={2}
+            style={[styles.uploadButton, activeBtn === 3 && styles.activeBtn]}
+            onPress={() => {
+              setActiveBtn(3);
+              setCategory("studio arts");
+            }}
+          >
             <Text style={styles.buttonText}>Studio Arts</Text>
           </TouchableOpacity>
         </View>
@@ -98,15 +108,21 @@ const AddPost = () => {
             borderRadius: 10,
           }}
           onPress={async () => {
-            const result = await uploadArt(image, title, category, description , location);
+            const result = await uploadArt(
+              image,
+              title,
+              category,
+              description,
+              location
+            );
             if (result) {
               setImage(null);
               setTitle("");
               setCategory("");
-              setDescription("")
+              setDescription("");
               setLocation("");
-              setFilename("")
-              setActiveBtn(null)
+              setFilename("");
+              setActiveBtn(null);
             }
           }}
         >
@@ -151,8 +167,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 5,
     padding: 10,
-    marginBottom:10,
-
+    marginBottom: 10,
   },
   buttonText: {
     marginLeft: 8,
@@ -164,9 +179,9 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
   },
-  activeBtn:{
-    backgroundColor:"lightblue",
-  } 
+  activeBtn: {
+    backgroundColor: "lightblue",
+  },
 });
 
 export default AddPost;

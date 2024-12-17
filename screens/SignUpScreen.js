@@ -17,48 +17,51 @@ const SignUpScreen = ({ navigation }) => {
 
   const handleSignUp = async () => {
     try {
-      const signup = await addUser (fullName, email, password, confirmPass);
-      if(signup){
+      const signup = await addUser(fullName, email, password, confirmPass);
+      if (signup) {
         setTimeout(() => {
           navigation.navigate("Login");
-        },200)
+        }, 200);
       }
     } catch (error) {
       console.error(error);
-    } 
+    }
   };
 
-
-
- return (
-  <View style={styles.container}>
-    <Text style={styles.header}>Create an Account</Text>
-    <TextInput style={styles.input} placeholder="Full Name" onChangeText={setFullName}/>
-    <TextInput style={styles.input} placeholder="Enter your email" onChangeText={setEmail}/>
-    <TextInput
-      style={styles.input}
-      placeholder="Create a password"
-      secureTextEntry
-      onChangeText={setPassword}
-    />
-    <TextInput
-      style={styles.input}
-      placeholder="Confirm password"
-      secureTextEntry
-      onChangeText={setConfirmPass}
-    />
-    <TouchableOpacity
-      style={styles.button}
-      onPress={handleSignUp}
-    >
-      <Text style={styles.buttonText}>Sign Up</Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-      <Text style={styles.already}>Already have an account? Login</Text>
-    </TouchableOpacity>
-  </View>
-);
-}
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Create an Account</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Full Name"
+        onChangeText={setFullName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your email"
+        onChangeText={setEmail}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Create a password"
+        secureTextEntry
+        onChangeText={setPassword}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm password"
+        secureTextEntry
+        onChangeText={setConfirmPass}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.already}>Already have an account? Login</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: "#fff" },

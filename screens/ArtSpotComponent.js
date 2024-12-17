@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList,Alert } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  Alert,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SQLite from 'expo-sqlite';
+import * as SQLite from "expo-sqlite";
 import { deleteSave } from "../db/deleteSave";
 
-const ArtSpotComponent = ({navigation}) => {
+const ArtSpotComponent = ({ navigation }) => {
   const [data, setData] = useState([]);
-  const [names, setNames] = useState({}); 
+  const [names, setNames] = useState({});
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
       const db = await SQLite.openDatabaseAsync("artFinder");
-      const user_id = await AsyncStorage.getItem("id")
-      const result = await db.getAllAsync("SELECT * FROM savearts WHERE user_id = ?", [Number(user_id)]);
+      const user_id = await AsyncStorage.getItem("id");
+      const result = await db.getAllAsync(
+        "SELECT * FROM savearts WHERE user_id = ?",
+        [Number(user_id)]
+      );
       setData(result);
       const userNames = {};
       for (const item of result) {
@@ -24,30 +35,41 @@ const ArtSpotComponent = ({navigation}) => {
       setNames(userNames);
     };
     fetchPost();
-  }, [refresh,navigation]);
+  }, [refresh, navigation]);
 
   const getName = async (id) => {
     try {
       const db = await SQLite.openDatabaseAsync("artFinder");
-      const result = await db.getFirstAsync("SELECT fullname from art_users WHERE user_id = ?", [id]);
+      const result = await db.getFirstAsync(
+        "SELECT fullname from art_users WHERE user_id = ?",
+        [id]
+      );
       return result.fullname;
     } catch (error) {
       console.log(error);
     }
   };
 
-
-  if(data.length === 0){
-    return(
+  if (data.length === 0) {
+    return (
       <View>
         <Text>No data available</Text>
         <TouchableOpacity onPress={() => setRefresh(!refresh)}>
-          <View style={{padding:10, backgroundColor:"lightblue", margin:10, width:80, flexDirection:"row", borderRadius:10}}>
-            <Text style={{fontSize:15}}>refresh</Text>
+          <View
+            style={{
+              padding: 10,
+              backgroundColor: "lightblue",
+              margin: 10,
+              width: 80,
+              flexDirection: "row",
+              borderRadius: 10,
+            }}
+          >
+            <Text style={{ fontSize: 15 }}>refresh</Text>
           </View>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 
   return (
@@ -56,28 +78,31 @@ const ArtSpotComponent = ({navigation}) => {
         data={data}
         renderItem={({ item }) => (
           <View style={styles.data}>
-            <TouchableOpacity style={styles.deleteButton} onPress={() => {
-              Alert.alert(
-                "delete save art",
-                "do you want to delete this save art?",
-                [
-                  {
-                    text: "Cancel",
-                    onPress: () => {
-                      console.log("you canceled delete");
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => {
+                Alert.alert(
+                  "delete save art",
+                  "do you want to delete this save art?",
+                  [
+                    {
+                      text: "Cancel",
+                      onPress: () => {
+                        console.log("you canceled delete");
+                      },
                     },
-                  },
-                  {
-                    text: "delete",
-                    onPress: () => {
-                      deleteSave(item.save_id);
-                      setRefresh(!refresh)
+                    {
+                      text: "delete",
+                      onPress: () => {
+                        deleteSave(item.save_id);
+                        setRefresh(!refresh);
+                      },
                     },
-                  },
-                ],
-                { cancelable: false }
-              );
-            }}>
+                  ],
+                  { cancelable: false }
+                );
+              }}
+            >
               <Ionicons
                 name="trash-outline"
                 size={20}
@@ -94,9 +119,13 @@ const ArtSpotComponent = ({navigation}) => {
               <Text style={styles.dataInfo}>
                 Posted by: {item.postedBy || "Loading..."}
               </Text>
-              <Text style={styles.dataInfo}>Rating: {item.rating ? item.rating : "0"}</Text>
+              <Text style={styles.dataInfo}>
+                Rating: {item.rating ? item.rating : "0"}
+              </Text>
               <Text style={styles.dataInfo}>Location: {item.location}</Text>
-              <Text style={styles.dataInfo}>Description: {item.description}</Text>
+              <Text style={styles.dataInfo}>
+                Description: {item.description}
+              </Text>
             </View>
           </View>
         )}
@@ -125,8 +154,8 @@ const styles = StyleSheet.create({
     right: 10,
     padding: 5,
     zIndex: 1,
-    backgroundColor:"white",
-    borderRadius:100
+    backgroundColor: "white",
+    borderRadius: 100,
   },
   deleteIcon: {
     color: "red",
